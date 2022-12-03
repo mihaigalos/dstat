@@ -26,11 +26,11 @@ pub fn colorize(arguments: Vec<String>, state_provider: fn(&str) -> bool) -> Vec
 mod tests {
     use super::*;
 
-    fn systemctl_is_inactive(_service: &str) -> bool {
+    fn is_inactive(_service: &str) -> bool {
         false
     }
 
-    fn systemctl_is_active(_service: &str) -> bool {
+    fn is_active(_service: &str) -> bool {
         true
     }
 
@@ -40,7 +40,7 @@ mod tests {
         let expected_string = format!("{} {}", ColoredString::from("●").red(), "docker");
         let expected = vec![ColoredString::from(&expected_string[..])];
 
-        let result: Vec<ColoredString> = colorize(input, systemctl_is_inactive);
+        let result: Vec<ColoredString> = colorize(input, is_inactive);
 
         assert_eq!(result[0], *expected.get(0).unwrap());
     }
@@ -51,7 +51,7 @@ mod tests {
         let expected_string = format!("{} {}", ColoredString::from("●").green(), "docker");
         let expected = vec![ColoredString::from(&expected_string[..])];
 
-        let result: Vec<ColoredString> = colorize(input, systemctl_is_active);
+        let result: Vec<ColoredString> = colorize(input, is_active);
 
         assert_eq!(result[0], *expected.get(0).unwrap());
     }

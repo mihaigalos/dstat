@@ -1,4 +1,4 @@
-pub fn systemctl_is_active(service: &str) -> bool {
+pub fn is_active(service: &str) -> bool {
     use std::process::Command;
     let output = Command::new("systemctl")
         .args(["is-active", service])
