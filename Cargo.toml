@@ -2,6 +2,21 @@
 name = "dstat"
 version = "0.0.1"
 edition = "2021"
+authors = ["Mihai Galos <mihaigalos@gmail.com>"]
+description = "🎯 A command line download/upload tool with resume."
+categories = [
+    "command-line-utilities",
+    "development-tools::debugging",
+]
+
+keywords = [ 
+    "cli",
+    "logging",
+    "systemd",
+]
+
+repository = "https://github.com/mihaigalos/aim"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
