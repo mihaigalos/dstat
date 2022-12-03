@@ -1,9 +1,9 @@
 [package]
 name = "dstat"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 authors = ["Mihai Galos <mihaigalos@gmail.com>"]
-description = "🎯 A command line download/upload tool with resume."
+description = "[●◀] Query systemd units quickly from the command line."
 categories = [
     "command-line-utilities",
     "development-tools::debugging",
@@ -15,11 +15,10 @@ keywords = [
     "systemd",
 ]
 
-repository = "https://github.com/mihaigalos/aim"
+repository = "https://github.com/mihaigalos/dstat"
 license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 colored = "2"
-
