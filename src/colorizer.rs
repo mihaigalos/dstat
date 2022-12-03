@@ -23,14 +23,29 @@ pub fn colorize(arguments: Vec<String>, state_provider:fn(&str) -> bool) -> Vec<
 mod tests {
     use super::*;
 
-    fn systemctl_is_active(_service: &str) -> bool {
+    fn systemctl_is_inactive(_service: &str) -> bool {
         false
     }
 
+    fn systemctl_is_active(_service: &str) -> bool {
+        true
+    }
+
     #[test]
-    fn test_colorize_works_when_typical() {
+    fn test_colorize_works_is_red_when_typical() {
         let input = vec!["program_name".to_string(), "docker".to_string()];
         let expected_string = format!("{} {}",ColoredString::from("●").red(), "docker");
+        let expected = vec![ColoredString::from(&expected_string[..])];
+
+        let result: Vec<ColoredString> = colorize(input, systemctl_is_inactive);
+
+        assert_eq!(result[0], *expected.get(0).unwrap());
+    }
+
+    #[test]
+    fn test_colorize_works_is_green_when_typical() {
+        let input = vec!["program_name".to_string(), "docker".to_string()];
+        let expected_string = format!("{} {}",ColoredString::from("●").green(), "docker");
         let expected = vec![ColoredString::from(&expected_string[..])];
 
         let result: Vec<ColoredString> = colorize(input, systemctl_is_active);
