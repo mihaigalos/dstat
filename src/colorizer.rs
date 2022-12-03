@@ -1,10 +1,6 @@
 use colored::*;
 
-fn systemctl_is_active(_service: &str) -> bool {
-    false
-}
-
-pub fn colorize(arguments: Vec<String>) -> Vec<ColoredString> {
+pub fn colorize(arguments: Vec<String>, state_provider:fn(&str) -> bool) -> Vec<ColoredString> {
     let mut result: Vec<ColoredString> = vec![];
     if arguments.len() == 1 {
         println!("Usage: {} <list of units to inspect>",env!("CARGO_PKG_NAME"));
@@ -12,7 +8,7 @@ pub fn colorize(arguments: Vec<String>) -> Vec<ColoredString> {
 
     for service in arguments.iter().skip(1) {
         let bullet = ColoredString::from("●");
-        let bullet = match systemctl_is_active(service){
+        let bullet = match state_provider(service){
             true => bullet.green(),
             false => bullet.red(),
         };
@@ -27,13 +23,17 @@ pub fn colorize(arguments: Vec<String>) -> Vec<ColoredString> {
 mod tests {
     use super::*;
 
+    fn systemctl_is_active(_service: &str) -> bool {
+        false
+    }
+
     #[test]
     fn test_colorize_works_when_typical() {
         let input = vec!["program_name".to_string(), "docker".to_string()];
         let expected_string = format!("{} {}",ColoredString::from("●").red(), "docker");
         let expected = vec![ColoredString::from(&expected_string[..])];
 
-        let result: Vec<ColoredString> = colorize(input);
+        let result: Vec<ColoredString> = colorize(input, systemctl_is_active);
 
         assert_eq!(result[0], *expected.get(0).unwrap());
     }
