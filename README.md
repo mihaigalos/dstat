@@ -1,5 +1,7 @@
 # dstat
 
+[![crates.io](https://img.shields.io/crates/d/dstat.svg)](https://crates.io/crates/dstat)
+
 Query systemd units quickly from the command line. 
 
 ![resume example](screenshots/dstat.png)
